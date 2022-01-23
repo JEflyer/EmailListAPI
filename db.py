@@ -25,3 +25,5 @@ def addEmail(Email):
         )
     )
 
+def __init__():
+    createTable()
