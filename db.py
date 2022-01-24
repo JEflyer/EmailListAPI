@@ -1,29 +1,45 @@
 import sqlite3
 from data import Email
+import pandas as pd
 
 
 connection = sqlite3.connect(
-    ":memory:"
+    "emails.db"
 )  # instead of :memory: use DbName.db in production
 
 cursor = connection.cursor()
 
 
 def createTable():
-    cursor.execute(
-        """CREATE TABLE EmailList (id INTEGER AUTOINCREMENT, firstName text, lastName text, email text, number text)"""
-    )
+    with connection:
+        cursor.execute(
+            """CREATE TABLE EmailList ( firstName text, lastName text, email text, number text)"""
+        )
 
 def addEmail(Email):
-    cursor.execute(
-        """INSERT INTO EmailList VALUES (?,?,?,?)""",
-        (
-            Email.firstName,
-            Email.lastName,
-            Email.email,
-            Email.number
+    with connection:
+        cursor.execute(
+            """INSERT INTO EmailList VALUES (?,?,?,?)""",
+            (
+                
+                Email.firstName,
+                Email.lastName,
+                Email.email,
+                Email.number
+            )
         )
+
+
+def getEmails():
+    return cursor.execute(
+        """SELECT rowId,email FROM EmailList"""
     )
 
 def __init__():
-    createTable()
+    try:
+        createTable()
+    except:
+        return
+
+
+__init__()

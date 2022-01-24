@@ -1,25 +1,39 @@
-from flask import Flask,abort, request
-from db import addEmail
+from tkinter.tix import Tree
+from flask import Flask, request, abort
+from importlib_metadata import method_cache
+
+from db import addEmail,createTable
 from data import Email
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask(__name__, static_url_path="/static")
 
 
-@app.before_request
+@app.before_request #turn when you need to add mails
 def limit_remote_addr():
-  if request.remote_addr != '10.20.30.40':
-    abort(403) # Forbidden...
+    if request.remote_addr != "10.20.30.40":
+        abort(403)  # Forbidden...
 
-@app.route("/AddEmail/<firstName>/<lastName>/<email>/<number>", methods=['POST'])
-def generate(firstName,lastName,email,number):
-    if request.method == "POST":
-        instance = Email(firstName,lastName,email,number)
+
+@app.route(
+    "/", methods=["GET", "POST"]
+)  # take get and post methods both one to render form on frontend post to submit form
+def index():
+    request_method = request.method
+    if request_method == "POST":
+        instance = Email(
+            request.form[
+                "firstName"
+            ],  # through request get the values of user input and pass to email instance
+            request.form["lastName"],
+            request.form["email"],
+            request.form["number"],
+        )
         try:
-            addEmail(instance)
+            addEmail(instance)  # save in db
             return "success", 200
         except:
-            return "error",500
-
+            return "error", 500
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
