@@ -1,6 +1,4 @@
-from tkinter.tix import Tree
 from flask import Flask, request, abort
-from importlib_metadata import method_cache
 
 from db import addEmail,createTable
 from data import Email
