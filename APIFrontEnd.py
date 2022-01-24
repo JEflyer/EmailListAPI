@@ -26,7 +26,6 @@ def index():
             ],  # through request get the values of user input and pass to email instance
             request.form["lastName"],
             request.form["email"],
-            request.form["number"],
         )
         try:
             addEmail(instance)  # save in db

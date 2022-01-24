@@ -19,9 +19,8 @@ def createTable():
 def addEmail(Email):
     with connection:
         cursor.execute(
-            """INSERT INTO EmailList VALUES (?,?,?,?)""",
+            """INSERT INTO EmailList VALUES (?,?,?)""",
             (
-                
                 Email.firstName,
                 Email.lastName,
                 Email.email
