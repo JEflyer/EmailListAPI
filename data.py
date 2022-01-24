@@ -1,7 +1,7 @@
 class Email:
-    def __init__(self, firstName, lastName, email, number):
+    def __init__(self, firstName, lastName, email):
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
-        self.number = number
+        
         

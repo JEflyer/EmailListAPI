@@ -3,7 +3,7 @@ import db
 import pandas as pd
 from data import Email
 
-db.addEmail(Email("jonny","else","testEmail@email.com","number"))
+db.addEmail(Email("jonny","else","testEmail@email.com"))
 
 data = pd.DataFrame(db.getEmails(),columns=["id","email"])
 

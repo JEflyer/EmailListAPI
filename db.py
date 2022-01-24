@@ -13,7 +13,7 @@ cursor = connection.cursor()
 def createTable():
     with connection:
         cursor.execute(
-            """CREATE TABLE EmailList ( firstName text, lastName text, email text, number text)"""
+            """CREATE TABLE EmailList ( firstName text, lastName text, email text)"""
         )
 
 def addEmail(Email):
@@ -24,8 +24,7 @@ def addEmail(Email):
                 
                 Email.firstName,
                 Email.lastName,
-                Email.email,
-                Email.number
+                Email.email
             )
         )
 
